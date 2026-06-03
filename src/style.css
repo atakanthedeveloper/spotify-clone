@@ -295,3 +295,9 @@ code {
     border-right-color: var(--border);
   }
 } */
+
+@theme {
+  --color-spotify-green: #1ED760;
+  --color-spotify-dark: #121212;
+  --color-spotify-white: #FFFFFF;
+}
