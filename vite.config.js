@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       tailwindcss(),
     ],
-    root: "./src"
+    root: "./src",
+    envDir: process.cwd()
   }
 })

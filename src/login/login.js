@@ -1,9 +1,8 @@
-const clientId = 'b8b490f027174e92bf8371e7f9dfbf01';
-const mainUrl = "http://127.0.0.1:3000";
-const redirectUri = `${mainUrl}/login/login.html`;
+import { CLIENT_ID as clientId} from "../common.js";
+import { SCOPE as scope} from "../common.js";
 
-const scope =
-  'user-top-read user-follow-read playlist-read-private user-library-read';
+const mainUrl = import.meta.env.VITE_MAIN_URL;
+const redirectUri = import.meta.env.VITE_REDIRECT_URI;
 
 const generateRandomString = (length) => {
   const possible =
@@ -35,7 +34,8 @@ const authorizeUser = async () => {
   localStorage.setItem('code_verifier', codeVerifier);
 
   const authUrl = new URL('https://accounts.spotify.com/authorize');
-
+  console.log('mainUrl:', mainUrl)
+  console.log('redirectUri:', redirectUri)
   const params = {
     response_type: 'code',
     client_id: clientId,
@@ -87,14 +87,14 @@ const getToken = async (code) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const params = new URLSearchParams(window.location.search)
-  const code = params.get('code')
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
 
   if (code) {
     const accessToken = await getToken(code);
 
     if (accessToken) {
-      window.location.replace(`${mainUrl}/dashboard/dashboard.html`);
+      window.location.replace(import.meta.env.VITE_DASHBOARD_URL);
     }
 
     return
